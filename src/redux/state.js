@@ -8,7 +8,8 @@ let state = {
             {id: 2, message: "It's my first post", likesCount: 20},
             {id: 3, message: "BlaBla", likesCount: 11},
             {id: 4, message: "DaDa", likesCount: 31},
-        ]
+        ],
+        newPostText: 'it-kamasutra.com' // вводим по умолчанию в textarea - типа хардкодим ее (урок 34)
     },
 
     dialogsPage: {

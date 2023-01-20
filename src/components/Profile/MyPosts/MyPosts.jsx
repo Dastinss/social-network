@@ -21,12 +21,18 @@ const MyPosts = (props) => {
         newPostElement.current.value = ' ';
     } // прокинули ф-цию addPost через props из state, т.е. фактически из BLL в наш UI
 
+    let onPostChange = () => {
+        let text = newPostElement.current.value;
+        console.log('text')
+    }
+
     return (
+        //урок 32 добавили value в textarea и в нее из пропсов newPostText , которое нам приходит через вводимую строку в state.js, из которой в свою очередь попадает на єкран - это круговорот FLEX!
         <div className={s.postsBlock}>
             <h3>MyPosts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
