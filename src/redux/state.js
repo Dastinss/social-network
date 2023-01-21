@@ -34,7 +34,6 @@ let state = {
 }
 
 export let addPost = (postMessage) => {   //выносим процесс добавления новых постов в MyPost texteria сюда, т.е. в BLL
-    debugger;
     let newPost = {
         id: 5,
         message: postMessage, // переменная postMessage придет к нам из компоненты из поля техтєриа, мы еще не знаем чему она будет равна
@@ -44,5 +43,10 @@ export let addPost = (postMessage) => {   //выносим процесс доб
     state.profilePage.posts.push(newPost);
     rerenderEnrireTree(state);
 } // добавили rerenderEnrireTree для того, чтобі перерисовавыть все дерево после добавления поста, т.к. иначе новый пост не появляется. Вутрь єто ф-ции закинули state для передачи данніх в render.jx
+
+export let updateNewPostText = (newText) => {   //выносим процесс добавления новых постов в MyPost texteria сюда, т.е. в BLL
+    state.profilePage.newPostText = newText;
+    rerenderEnrireTree(state);
+}
 
 export default state;
