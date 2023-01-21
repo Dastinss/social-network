@@ -21,9 +21,6 @@ const App = (props) => {
                         <Route path="/profile" element={<Profile
                             profilePage={props.state.profilePage}
                             addPost={props.addPost}/>}/>
-                        <Route path="/news" element={<Profile/>}/>
-                        <Route path="/music" element={<Profile/>}/>
-                        <Route path="/settings" element={<Profile/>}/>
                     </Routes>
                 </div>
             </div>
