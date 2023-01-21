@@ -30,17 +30,20 @@ let state = {
             {id: 5, message: 'Yo'},
             {id: 6, message: 'Not bad'}
         ]
-    }
+    },
+    sidebar: {}
 }
 
-export let addPost = (postMessage) => {   //выносим процесс добавления новых постов в MyPost texteria сюда, т.е. в BLL
+window.state = state;
+
+export let addPost = () => {   //выносим процесс добавления новых постов в MyPost texteria сюда, т.е. в BLL
     let newPost = {
         id: 5,
-        message: postMessage, // переменная postMessage придет к нам из компоненты из поля техтєриа, мы еще не знаем чему она будет равна
+        message: state.profilePage.newPostText, // ранее была переменная postMessage которая приходила к нам из компоненты из поля техтєриа. потом заменили ее на
         likelikesCount: 0
     };
-
     state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = ''; // перенесли зануление из MyPost.js, тк єто бизнес функция
     rerenderEnrireTree(state);
 } // добавили rerenderEnrireTree для того, чтобі перерисовавыть все дерево после добавления поста, т.к. иначе новый пост не появляется. Вутрь єто ф-ции закинули state для передачи данніх в render.jx
 

@@ -16,9 +16,9 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef() // єто нужно запомнить, т.е. это внутренняя примочка Реакта. Делаем ссылку на добавление в дальнейшем Поста из ТехтЭриа
 
     let addPost = () => {
-        let text = newPostElement.current.value;
-        props.addPost(text);
-        newPostElement.current.value = ' ';
+        // let text = newPostElement.current.value; // удалили ,т.к. в addPost нет смысла добавлять этот текст, т.к. он все равно не на что не влияет (см.урок 34 29:24)
+        props.addPost();
+        // props.updateNewPostText(''); // перенесли зануление в state.js, тк єто бизнес функция
     } // прокинули ф-цию addPost через props из state, т.е. фактически из BLL в наш UI
 
     let onPostChange = () => {
