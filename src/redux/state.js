@@ -1,4 +1,6 @@
-import {rerenderEnrireTree} from "../render";
+let rerenderEnrireTree = () => {
+    console.log('State was changed') // удалили файл рендер и перенесли все из него в индекс.жс
+}
 
 let state = {
     profilePage: {
@@ -36,7 +38,7 @@ let state = {
 
 window.state = state;
 
-export let addPost = () => {   //выносим процесс добавления новых постов в MyPost texteria сюда, т.е. в BLL
+export const addPost = () => {   //выносим процесс добавления новых постов в MyPost texteria сюда, т.е. в BLL
     let newPost = {
         id: 5,
         message: state.profilePage.newPostText, // ранее была переменная postMessage которая приходила к нам из компоненты из поля техтєриа. потом заменили ее на
@@ -47,9 +49,13 @@ export let addPost = () => {   //выносим процесс добавлен�
     rerenderEnrireTree(state);
 } // добавили rerenderEnrireTree для того, чтобі перерисовавыть все дерево после добавления поста, т.к. иначе новый пост не появляется. Вутрь єто ф-ции закинули state для передачи данніх в render.jx
 
-export let updateNewPostText = (newText) => {   //выносим процесс добавления новых постов в MyPost texteria сюда, т.е. в BLL
+export const updateNewPostText = (newText) => {   //выносим процесс добавления новых постов в MyPost texteria сюда, т.е. в BLL
     state.profilePage.newPostText = newText;
     rerenderEnrireTree(state);
 }
+
+export const subscriber = (observer) => {
+    rerenderEnrireTree = observer; // нельзя ни в коем случае приписывать ни let ни const ни var
+};
 
 export default state;
