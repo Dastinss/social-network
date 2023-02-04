@@ -1,42 +1,47 @@
-let rerenderEnrireTree = () => {
+//lesson 37 упаковывем все ф-ции и все переменные запаковывем в один объект store - концепция ООП
+
+let store = {  // у объекта  store есть св-во state, которое делаем приватным в объекте store
+    _state: {
+
+        profilePage: {
+            posts: [
+                {id: 1, message: "Hello! How are you?", likesCount: 0},
+                {id: 2, message: "It's my first post", likesCount: 20},
+                {id: 3, message: "BlaBla", likesCount: 11},
+                {id: 4, message: "DaDa", likesCount: 31},
+            ],
+
+            newPostText: 'it-kamasutra.com' // вводим по умолчанию в textarea - типа хардкодим ее (урок 34)
+        },
+
+        dialogsPage: {
+
+            dialogs: [
+                {id: 1, name: 'Misha'},
+                {id: 2, name: 'Anya'},
+                {id: 3, name: 'Mama'},
+                {id: 4, name: 'Kolya'},
+                {id: 5, name: 'Slava'},
+                {id: 6, name: 'Bogdana'}
+            ],
+            messages: [
+                {id: 1, message: 'Hello!!'},
+                {id: 2, message: 'How are you?'},
+                {id: 3, message: 'Yo'},
+                {id: 4, message: 'Yo'},
+                {id: 5, message: 'Yo'},
+                {id: 6, message: 'Not bad'}
+            ]
+        },
+        sidebar: {}
+    }
+}
+
+let rerenderEnrireTree = () => { делаем метод 
     console.log('State was changed') // удалили файл рендер и перенесли все из него в индекс.жс
 }
 
-let state = {
-    profilePage: {
 
-        posts: [
-            {id: 1, message: "Hello! How are you?", likesCount: 0},
-            {id: 2, message: "It's my first post", likesCount: 20},
-            {id: 3, message: "BlaBla", likesCount: 11},
-            {id: 4, message: "DaDa", likesCount: 31},
-        ],
-
-        
-        newPostText: 'it-kamasutra.com' // вводим по умолчанию в textarea - типа хардкодим ее (урок 34)
-    },
-
-    dialogsPage: {
-
-        dialogs: [
-            {id: 1, name: 'Misha'},
-            {id: 2, name: 'Anya'},
-            {id: 3, name: 'Mama'},
-            {id: 4, name: 'Kolya'},
-            {id: 5, name: 'Slava'},
-            {id: 6, name: 'Bogdana'}
-        ],
-        messages: [
-            {id: 1, message: 'Hello!!'},
-            {id: 2, message: 'How are you?'},
-            {id: 3, message: 'Yo'},
-            {id: 4, message: 'Yo'},
-            {id: 5, message: 'Yo'},
-            {id: 6, message: 'Not bad'}
-        ]
-    },
-    sidebar: {}
-}
 
 window.state = state;
 
@@ -61,3 +66,5 @@ export const subscriber = (observer) => {
 };
 
 export default state;
+// window.store = store; // store OOP
+
