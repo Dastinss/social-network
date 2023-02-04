@@ -1,6 +1,8 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
+
 
 const MyPosts = (props) => {
 
@@ -21,7 +23,8 @@ const MyPosts = (props) => {
         // props.addPost();
 
         //заменили закоменченный выше метода на dispatch
-        props.dispatch( {type: 'ADD-POST'} );
+        // props.dispatch( {type: 'ADD-POST'} );
+        props.dispatch( addPostActionCreator())
     } // прокинули ф-цию addPost через props из state, т.е. фактически из BLL в наш UI
 
     let onPostChange = () => {
@@ -30,8 +33,9 @@ const MyPosts = (props) => {
         // props.updateNewPostText(text);
 
         //заменили закоменченный выше метод на dispatch
-        let action = {type: 'UPDATE-NEW-POST-TEXT', newText: text };
-        props.dispatch( action );
+        // let action = {type: 'UPDATE-NEW-POST-TEXT', newText: text };
+        let action = updateNewPostTextActionCreator(text);
+        props.dispatch(action)
     }
 
     return (

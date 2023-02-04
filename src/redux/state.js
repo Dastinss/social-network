@@ -1,4 +1,6 @@
 //lesson 37 упаковывем все ф-ции и все переменные запаковывем в один объект store - концепция ООП
+const ADD_POST = 'ADD-POST';
+const  UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 let store = {  // у объекта  store есть св-во state, которое делаем приватным в объекте store
     _state: {
@@ -64,7 +66,7 @@ let store = {  // у объекта  store есть св-во state, котор�
 
     //заменили закоменченные выше методы на один dispatch
     dispatch(action) { // используем этот метод внутри store вместо множеств других методов в соц сети которые будут в будущем штук 200 ( по аналогии с addPost и updateNewPostText)
-        if (action.type === 'ADD-POST') {                       //перенесли в dispatch
+        if (action.type === ADD_POST) {                       //перенесли в dispatch. Далее заменили с if (action.type === 'ADD-POST') на то что прописано
             let newPost = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -73,12 +75,24 @@ let store = {  // у объекта  store есть св-во state, котор�
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {    //перенесли в dispatch
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
+        } else {
+            if (action.type === UPDATE_NEW_POST_TEXT) {    //перенесли в dispatch
+                        this._state.profilePage.newPostText = action.newText;
+                        this._callSubscriber(this._state);
+                    }
         }
     }
 }
+
+export const addPostActionCreator = () => ({ type: ADD_POST })
+        // type: 'ADD-POST'
+
+
+export const updateNewPostTextActionCreator = (text) => (
+    { type: UPDATE_NEW_POST_TEXT, newText: text }
+)
+    // return { type: UPDATE_NEW_POST_TEXT, newText: text }
+
 
 
 export default store; // ранее экспортировали state, а теперь экспортируем store
