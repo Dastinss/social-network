@@ -1,6 +1,9 @@
 //lesson 37 упаковывем все ф-ции и все переменные запаковывем в один объект store - концепция ООП
+import {type} from "@testing-library/user-event/dist/type";
+
 const ADD_POST = 'ADD-POST';
-const  UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 
 let store = {  // у объекта  store есть св-во state, которое делаем приватным в объекте store
     _state: {
@@ -33,7 +36,8 @@ let store = {  // у объекта  store есть св-во state, котор�
                 {id: 4, message: 'Yo'},
                 {id: 5, message: 'Yo'},
                 {id: 6, message: 'Not bad'}
-            ]
+            ],
+            newMessageBody: ''
         },
         sidebar: {}
     },
@@ -75,24 +79,23 @@ let store = {  // у объекта  store есть св-во state, котор�
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
-        } else {
-            if (action.type === UPDATE_NEW_POST_TEXT) {    //перенесли в dispatch
-                        this._state.profilePage.newPostText = action.newText;
-                        this._callSubscriber(this._state);
-                    }
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {    //перенесли в dispatch
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            
         }
     }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST })
-        // type: 'ADD-POST'
+export const addPostActionCreator = () => ({type: ADD_POST})
+// type: 'ADD-POST'
 
 
 export const updateNewPostTextActionCreator = (text) => (
-    { type: UPDATE_NEW_POST_TEXT, newText: text }
+    {type: UPDATE_NEW_POST_TEXT, newText: text}
 )
-    // return { type: UPDATE_NEW_POST_TEXT, newText: text }
-
+// return { type: UPDATE_NEW_POST_TEXT, newText: text }
 
 
 export default store; // ранее экспортировали state, а теперь экспортируем store
