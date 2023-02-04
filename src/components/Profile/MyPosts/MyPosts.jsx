@@ -17,14 +17,21 @@ const MyPosts = (props) => {
 
     let addPost = () => {
         // let text = newPostElement.current.value; // удалили ,т.к. в addPost нет смысла добавлять этот текст, т.к. он все равно не на что не влияет (см.урок 34 29:24)
-        props.addPost();
         // props.updateNewPostText(''); // перенесли зануление в state.js, тк єто бизнес функция
+        // props.addPost();
+
+        //заменили закоменченный выше метода на dispatch
+        props.dispatch( {type: 'ADD-POST'} );
     } // прокинули ф-цию addPost через props из state, т.е. фактически из BLL в наш UI
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
         // console.log(text)
-        props.updateNewPostText(text);
+        // props.updateNewPostText(text);
+
+        //заменили закоменченный выше метод на dispatch
+        let action = {type: 'UPDATE-NEW-POST-TEXT', newText: text };
+        props.dispatch( action );
     }
 
     return (

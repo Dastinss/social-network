@@ -16,9 +16,12 @@ let rerenderEnrireTree = (state) =>{
 
     root.render(
         <React.StrictMode>
-            <App state={state} //везде заменили state на store._state, а далее на getState () т.к. напрямую к приватному св-ву обращаться не можем
-                 addPost={store.addPost.bind(store)} // отдавая свой метод кому то и хотим, чтобы владелец этого метода сохранился, мы должны этот метод забендить (связать через bind) с владельцем этого метода поэтому стоит два раза store
-                 updateNewPostText={store.updateNewPostText.bind(store)}/>
+            {/*<App state={state} //везде заменили state на store._state, а далее на getState () т.к. напрямую к приватному св-ву обращаться не можем*/}
+            {/*     addPost={store.addPost.bind(store)} // отдавая свой метод кому то и хотим, чтобы владелец этого метода сохранился, мы должны этот метод забендить (связать через bind) с владельцем этого метода поэтому стоит два раза store*/}
+            {/*     updateNewPostText={store.updateNewPostText.bind(store)}/>*/}
+
+            {/*//заменили закоменченные выше два метода на один dispatch*/}
+            <App state={state} dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>
     );}
 

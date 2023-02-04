@@ -22,8 +22,11 @@ const App = (props) => {
                         <Route path="/profile"
                                element={<Profile
                                    profilePage={props.state.profilePage}
-                                   addPost={props.addPost}
-                                   updateNewPostText={props.updateNewPostText}/>}/>
+                                   // addPost={props.addPost}
+                                   // updateNewPostText={props.updateNewPostText}/>}/>
+
+                                    //заменили закоменченные выше два метода на один dispatch
+                                   dispatch={props.dispatch}/>}/>
                     </Routes>
                 </div>
             </div>

@@ -8,10 +8,14 @@ const Profile = (props) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts = {props.profilePage.posts}
-                     newPostText = {props.profilePage.newPostText}
-                     updateNewPostText={props.updateNewPostText}
-                     addPost={props.addPost}/>
+            <MyPosts posts={props.profilePage.posts}
+                     newPostText={props.profilePage.newPostText}
+                // updateNewPostText={props.updateNewPostText}
+                // addPost={props.addPost}
+
+                //заменили закоменченные выше два метода на один dispatch
+                     dispatch={props.dispatch}
+            />
         </div>)
 }
 
