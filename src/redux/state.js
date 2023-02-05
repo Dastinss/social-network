@@ -3,7 +3,8 @@ import {type} from "@testing-library/user-event/dist/type";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'; //создали новую константу для добавления нового действия
+const SEND_MESSAGE = 'SEND-MESSAGE'; //создали новую константу для добавления нового действия
 
 let store = {  // у объекта  store есть св-во state, которое делаем приватным в объекте store
     _state: {
@@ -82,8 +83,14 @@ let store = {  // у объекта  store есть св-во state, котор�
         } else if (action.type === UPDATE_NEW_POST_TEXT) {    //перенесли в dispatch
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-            
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) { //пользователь вводит сообщение и говорит чтобы его отправили
+           this._state.dialogsPage.newMessageBody = action.body; //изменили стейт
+            this._callSubscriber(this._state)// сообщаем внешнему миру, что стейт изменился через метод, которому передаем єтот изменившийся стейт
+        } else if (action.type === SEND_MESSAGE) {
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = ''; //занулили что написано
+            this._state.dialogsPage.messages.push({id: 6, message: body});
+            this._callSubscriber(this._state)
         }
     }
 }
@@ -96,6 +103,11 @@ export const updateNewPostTextActionCreator = (text) => (
     {type: UPDATE_NEW_POST_TEXT, newText: text}
 )
 // return { type: UPDATE_NEW_POST_TEXT, newText: text }
+
+export const sendMessageCreator = () => ({type: SEND_MESSAGE})
+export const updateNewMessageBodyCreator = (body) => (
+    {type: UPDATE_NEW_MESSAGE_BODY, body: body})
+
 
 
 export default store; // ранее экспортировали state, а теперь экспортируем store
