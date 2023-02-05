@@ -1,14 +1,16 @@
 //lesson 37 упаковывем все ф-ции и все переменные запаковывем в один объект store - концепция ООП
 import {type} from "@testing-library/user-event/dist/type";
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
+import sidebarReducer from "./sidebar-reducer";
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'; //создали новую константу для добавления нового действия
-const SEND_MESSAGE = 'SEND-MESSAGE'; //создали новую константу для добавления нового действия
+// const ADD_POST = 'ADD-POST';
+// const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+// const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'; //создали новую константу для добавления нового действия
+// const SEND_MESSAGE = 'SEND-MESSAGE'; //создали новую константу для добавления нового действия
 
-let store = {  // у объекта  store есть св-во state, которое делаем приватным в объекте store
+let store = {  // у объекта  store есть св-во state, которое делаем приватным в объекте store. store управляет стейтом и его изменениями с помощью каких то методов, например dispatch
     _state: {
-
         profilePage: {
             posts: [
                 {id: 1, message: "Hello! How are you?", likesCount: 0},
@@ -19,7 +21,6 @@ let store = {  // у объекта  store есть св-во state, котор�
 
             newPostText: 'it-kamasutra.com' // вводим по умолчанию в textarea - типа хардкодим ее (урок 34)
         },
-
         dialogsPage: {
 
             dialogs: [
@@ -45,7 +46,6 @@ let store = {  // у объекта  store есть св-во state, котор�
     _callSubscriber() { //делаем методы из ф-ций удаляя let, стрелку и =
         console.log('State was changed'); // удалили файл рендер и перенесли все из него в индекс.жс
     },
-
     getState() {
         return this._state;
     },// этот метод не меняем наш state
@@ -70,43 +70,51 @@ let store = {  // у объекта  store есть св-во state, котор�
     // },
 
     //заменили закоменченные выше методы на один dispatch
-    dispatch(action) { // используем этот метод внутри store вместо множеств других методов в соц сети которые будут в будущем штук 200 ( по аналогии с addPost и updateNewPostText)
-        if (action.type === ADD_POST) {                       //перенесли в dispatch. Далее заменили с if (action.type === 'ADD-POST') на то что прописано
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likelikesCount: 0
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {    //перенесли в dispatch
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) { //пользователь вводит сообщение и говорит чтобы его отправили
-           this._state.dialogsPage.newMessageBody = action.body; //изменили стейт
-            this._callSubscriber(this._state)// сообщаем внешнему миру, что стейт изменился через метод, которому передаем єтот изменившийся стейт
-        } else if (action.type === SEND_MESSAGE) {
-            let body = this._state.dialogsPage.newMessageBody;
-            this._state.dialogsPage.newMessageBody = ''; //занулили что написано
-            this._state.dialogsPage.messages.push({id: 6, message: body});
-            this._callSubscriber(this._state)
-        }
+    dispatch(action) { // dispatch используем этот метод внутри store вместо множеств других методов в соц сети которые будут в будущем штук 200 ( по аналогии с addPost и updateNewPostText). action- это объект у которого как минимум есть св-во type
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action) //мы отдаем профайл пейдж текущую ф-цию в редьюсер с акшином, редьюсер преобразовываем и нам возвращает измененную подчасть стейта (если было изменение, если нет - будет тот же профайл пейдж)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+
+        this._callSubscriber(this._state);
+
+        //     if (action.type === ADD_POST) {                       //перенесли в dispatch. Далее заменили с if (action.type === 'ADD-POST') на то что прописано
+        //         let newPost = {
+        //             id: 5,
+        //             message: this._state.profilePage.newPostText,
+        //             likelikesCount: 0
+        //         };
+        //         this._state.profilePage.posts.push(newPost);
+        //         this._state.profilePage.newPostText = '';
+        //         this._callSubscriber(this._state);
+        //     } else if (action.type === UPDATE_NEW_POST_TEXT) {    //перенесли в dispatch
+        //         this._state.profilePage.newPostText = action.newText;
+        //         this._callSubscriber(this._state);
+        //     } else if (action.type === UPDATE_NEW_MESSAGE_BODY) { //пользователь вводит сообщение и говорит чтобы его отправили
+        //        this._state.dialogsPage.newMessageBody = action.body; //изменили стейт
+        //         this._callSubscriber(this._state)// сообщаем внешнему миру, что стейт изменился через метод, которому передаем єтот изменившийся стейт
+        //     } else if (action.type === SEND_MESSAGE) {
+        //         let body = this._state.dialogsPage.newMessageBody;
+        //         this._state.dialogsPage.newMessageBody = ''; //занулили что написано
+        //         this._state.dialogsPage.messages.push({id: 6, message: body});
+        //         this._callSubscriber(this._state)
+        //     }
+        // }
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST})
-// type: 'ADD-POST'
+// export const addPostActionCreator = () => ({type: ADD_POST})
+// // type: 'ADD-POST'
+//
+//
+// export const updateNewPostTextActionCreator = (text) => (
+//     {type: UPDATE_NEW_POST_TEXT, newText: text}
+// )
+// // return { type: UPDATE_NEW_POST_TEXT, newText: text }
 
-
-export const updateNewPostTextActionCreator = (text) => (
-    {type: UPDATE_NEW_POST_TEXT, newText: text}
-)
-// return { type: UPDATE_NEW_POST_TEXT, newText: text }
-
-export const sendMessageCreator = () => ({type: SEND_MESSAGE})
-export const updateNewMessageBodyCreator = (body) => (
-    {type: UPDATE_NEW_MESSAGE_BODY, body: body})
+// export const sendMessageCreator = () => ({type: SEND_MESSAGE})
+// export const updateNewMessageBodyCreator = (body) => (
+//     {type: UPDATE_NEW_MESSAGE_BODY, body: body})
 
 
 
