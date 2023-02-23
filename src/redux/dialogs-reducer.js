@@ -1,4 +1,4 @@
-import state from "./state";
+import state from "./store";
 import profileReducer from "./profile-reducer";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'; //создали новую константу для добавления нового действия
@@ -32,7 +32,7 @@ export const dialogsReducer = (state, action) => {
     // return state;
 }
 
-//перенесли с state.js
+//перенесли с store.js
 export const sendMessageCreator = () => ({type: SEND_MESSAGE});
 export const updateNewMessageBodyCreator = (body) => (
     {type: UPDATE_NEW_MESSAGE_BODY, body: body});

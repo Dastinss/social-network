@@ -5,8 +5,8 @@ import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import state from "./redux/state";
-import store from "./redux/state";
+import state from "./redux/store";
+import store from "./redux/store";
 
 
 const App = (props) => {

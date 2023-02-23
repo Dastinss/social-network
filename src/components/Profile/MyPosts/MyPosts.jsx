@@ -19,7 +19,7 @@ const MyPosts = (props) => {
 
     let addPost = () => {
         // let text = newPostElement.current.value; // удалили ,т.к. в addPost нет смысла добавлять этот текст, т.к. он все равно не на что не влияет (см.урок 34 29:24)
-        // props.updateNewPostText(''); // перенесли зануление в state.js, тк єто бизнес функция
+        // props.updateNewPostText(''); // перенесли зануление в store.js, тк єто бизнес функция
         // props.addPost();
 
         //заменили закоменченный выше метода на dispatch
@@ -39,7 +39,7 @@ const MyPosts = (props) => {
     }
 
     return (
-        //урок 32 добавили value в textarea и в нее из пропсов newPostText , которое нам приходит через вводимую строку в state.js, из которой в свою очередь попадает на єкран - это круговорот FLEX!
+        //урок 32 добавили value в textarea и в нее из пропсов newPostText , которое нам приходит через вводимую строку в store.js, из которой в свою очередь попадает на єкран - это круговорот FLEX!
         <div className={s.postsBlock}>
             <h3>MyPosts</h3>
             <div>

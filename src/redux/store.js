@@ -9,11 +9,11 @@ import sidebarReducer from "./sidebar-reducer";
 // const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'; //создали новую константу для добавления нового действия
 // const SEND_MESSAGE = 'SEND-MESSAGE'; //создали новую константу для добавления нового действия
 
-let store = {  // у объекта  store есть св-во state, которое делаем приватным в объекте store. store управляет стейтом и его изменениями с помощью каких то методов, например dispatch
+let store = {  // (єто ООП обїект, менеджер стейта) у объекта  store есть св-во state, которое делаем приватным в объекте store. store управляет стейтом и его изменениями с помощью каких то методов, например dispatch
     _state: {
         profilePage: {
             posts: [
-                {id: 1, message: "Hello! How are you?", likesCount: 0},
+                {id: 1, message: "Hello! How are you, baby?", likesCount: 0},
                 {id: 2, message: "It's my first post", likesCount: 20},
                 {id: 3, message: "BlaBla", likesCount: 11},
                 {id: 4, message: "DaDa", likesCount: 31},

@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import state, {subscriber} from "./redux/state";
-import store from "./redux/state";
+import store from "./redux/redux-store";
 import './index.css';
 // import {addPost, updateNewPostText} from "./redux/state";
 

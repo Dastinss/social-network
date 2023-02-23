@@ -1,6 +1,6 @@
-import state from "./state";
+import state from "./store";
 
-const ADD_POST = 'ADD-POST', UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT', profileReducer = (state, action) => { // перенесли из state.js для реализации теории reducer урок 41
+const ADD_POST = 'ADD-POST', UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT', profileReducer = (state, action) => { // перенесли из store.js для реализации теории reducer урок 41
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -37,7 +37,7 @@ const ADD_POST = 'ADD-POST', UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT', prof
     }
 };
 
-//перенесли с state.js
+//перенесли с store.js
 export const addPostActionCreator = () => ({type: ADD_POST});
 
 export const updateNewPostTextActionCreator = (text) => (
